@@ -38,7 +38,7 @@ class Vehicle:
         
         # south
         else:
-            self.y += displacement
+            self.y -= displacement
         
     def turn(self, direction):
         if direction == "L":
@@ -64,7 +64,16 @@ class Vehicle:
     
     # TODO-2 - implement this function
     def turn_right(self):
-        pass
+        """
+        Updates heading (for a right turn) based on current heading
+        """
+        next_heading = {
+            "N" : "E",
+            "E" : "S",
+            "S" : "W",
+            "W" : "N",
+        }
+        self.heading = next_heading[self.heading]
     
     def show_trajectory(self):
         """
