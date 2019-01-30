@@ -12,27 +12,34 @@ Date: 01/29/2019
 Author: Juan David Rios
 """
 
+#Uniform probability distribution
 p=[0.2, 0.2, 0.2, 0.2, 0.2]
+#Information of the world
 world=['green', 'red', 'red', 'green', 'green']
-measurements = ['red', 'green']
+#Observation at time 0 and 1
+measurements = ['red', 'red']
+#Moves at time 0 and 1
 motions = [1,1]
+
+#Probability factor update when the observation coincides with the world state
 pHit = 0.6
+#Probability factor update when the observation doesn't coincide with the world state
 pMiss = 0.2
 
+#Probability factor of moving to the correct position
 pExact = 0.8
+#Probability factor of moving U steps after the correct position
 pOvershoot = 0.1
+#Probability factor of moving U steps before the correct position
 pUndershoot = 0.1
-prob = [pUndershot, pExact, pOvershoot]
+
 
 def sense(p, Z):
     """
     Changes the probability distribution based on the observation Z
     and the measure probability pHit, pMiss
     """
-    q=[]
-    for i in range(len(p)):
-        hit = (Z == world[i])
-        q.append(p[i] * (hit * pHit + (1-hit) * pMiss))
+    q = [p[i]*pHit if world[i]==Z else p[i]*pMiss for i in range(len(p))]
     total = float(sum(q))
     for i in range(len(q)):
         q[i] /= total
@@ -44,7 +51,14 @@ def move(p, U):
     """
     q = []
     for i in range(len(p)):
-        q.append(p[i-U+1]*prob[0]+p[i-U]*prob[1]+p[i-U-1]*prob[2])
+        q.append(p[i-U+1]*pUndershoot + p[i-U]*pExact+p[i-U-1]*pOvershoot)
     return q
 
-print(sense(p,Z))
+#Test localization algorithm with the repetition of the loop sense-motion in a sequence of data points
+for i in range(len(measurements)):
+    p =  sense(p, measurements[i])
+    p = move(p, motions[i])
+    
+#Probability distribution after sense with measurements[0], move with motions[0], 
+#sense with measurements[1] and move with motions[1]
+print(p)
