@@ -51,14 +51,14 @@ def move(p, U):
     """
     q = []
     for i in range(len(p)):
-        q.append(p[i-U+1]*pUndershoot + p[i-U]*pExact+p[i-U-1]*pOvershoot)
+        q.append(p[i-U+1]*pUndershoot + p[i-U]*pExact + p[i-U-1]*pOvershoot)
     return q
 
 #Test localization algorithm with the repetition of the loop sense-motion in a sequence of data points
 for i in range(len(measurements)):
     p =  sense(p, measurements[i])
     p = move(p, motions[i])
-    
+
 #Probability distribution after sense with measurements[0], move with motions[0], 
 #sense with measurements[1] and move with motions[1]
 print(p)
