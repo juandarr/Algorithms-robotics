@@ -1,7 +1,15 @@
+/*
+ * Purpose: Implementation of Markov localization algorithm in 1D
+ * Author: Juan David Rios
+ * Date: January 31, 2019
+ * Intructions:
+ * Run "g++ -g -Wall -std=c++11 -omarkov main.cpp" in a Linux console
+*/
+
 #include <iostream>
 #include <vector>
 
-#include <helpers.h>
+#include "helpers.h"
 
 using std::vector;
 
