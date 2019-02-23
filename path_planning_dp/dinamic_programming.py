@@ -120,15 +120,22 @@ def optimum_policy(grid,init,goal,cost):
         next_state = None
 
         for a in range(len(action)):
+            # For a given action calculate the next state
             z2 = (z+action[a])%4
             x2 = x + forward[z2][0]
             y2 = y + forward[z2][1]
+
+            # If new state is within limits
             if x2 >= 0 and x2 < len(grid) and y2 >= 0 and y2 < len(grid[0]) and grid[x2][y2] == 0:
+                # Take the smallest value representing the next state, save the action producing
+                # that next state too
                 if val > values[z][x2][y2]:
                     val = values[z][x2][y2]
                     next_state = [x2,y2,z2]
-                    best_action = action_name[a] #forward_name[z] +action_name[a]
+                    best_action = action_name[a] 
+        # Store optimal next action in x,y policy position
         policy[x][y] = best_action
+        # If there is not next state, no solution found
         if next_state==None:
             return 'fail'
         x,y,z = next_state
