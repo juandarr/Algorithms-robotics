@@ -1,6 +1,6 @@
 '''
  ----------
-Dinamic programmign implementation for path planning in a 2D grid
+Dynamic programming implementation for path planning in a 2D grid
 Date: February 22/2019
 Author: Juan David Rios
 
