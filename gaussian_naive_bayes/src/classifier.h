@@ -15,11 +15,15 @@
 using std::string;
 using std::vector;
 
+// for portability of M_PI (V. Studio, MinGW, etc.)
+#ifndef M_PI
+    const double M_PI = 3.14159265358979323846;
+#endif
+
 // Unimodal gaussian distribution
 inline double gaussian(double std_x, double ux, double x);
 
 // Gaussian naive bayes class
-
 class GNB {
  public:
   /**

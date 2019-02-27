@@ -5,6 +5,7 @@
 */
 
 #include "classifier.h"
+
 #include <math.h>
 #include <string>
 #include <vector>
@@ -13,11 +14,6 @@
 //using Eigen::ArrayXd;
 using std::string;
 using std::vector;
-
-// for portability of M_PI (V. Studio, MinGW, etc.)
-#ifndef M_PI
-const double M_PI = 3.14159265358979323846;
-#endif
 
 // Initializes GNB
 GNB::GNB() {
@@ -47,14 +43,14 @@ void GNB::train(const vector<vector<double>> &data,
    int c;
    
    // Initializes vectors of mean, standard deviation and label probability values
-   for (int i = 0; i < possible_labels.size() ; ++i ) {
+   for (unsigned int i = 0; i < possible_labels.size() ; ++i ) {
        mean_values.push_back({0.0,0.0,0.0});
        std_values.push_back({0.0,0.0,0.0});
        p_label.push_back(0.0);
    }
    
    // Accumulate values of data per label per feature
-   for (int i = 0; i < data.size(); ++i) {
+   for (unsigned int i = 0; i < data.size(); ++i) {
        if (labels[i]==possible_labels[0]) c = 0;
        else if (labels[i]==possible_labels[1]) c = 1;
        else if (labels[i]==possible_labels[2]) c = 2;
@@ -68,8 +64,8 @@ void GNB::train(const vector<vector<double>> &data,
    }
    
    // Calculate mean value per label per feature
-   for (int c = 0; c < possible_labels.size(); ++c) {
-       for (int j = 0; j < data[0].size()-1; ++j) {
+   for (unsigned int c = 0; c < possible_labels.size(); ++c) {
+       for (unsigned int j = 0; j < data[0].size()-1; ++j) {
            mean_values[c][j] /= p_label[c];
            //std::cout << " Mean value for class "<<c<< " , feature "<< j << " : " << mean_values[c][j] << std::endl;
            //std::cout << "Total labels in class " << c<<" : " << p_label[c] << std::endl;        
@@ -77,7 +73,7 @@ void GNB::train(const vector<vector<double>> &data,
    }
    
    // Accumulate values of data minus the mean
-   for (int i = 0; i < data.size(); ++i) {
+   for (unsigned int i = 0; i < data.size(); ++i) {
        
        if (labels[i]==possible_labels[0]) c = 0;
        else if (labels[i]==possible_labels[1]) c = 1;
@@ -91,8 +87,8 @@ void GNB::train(const vector<vector<double>> &data,
    }
   
   // Standard deviation per label per feature
-  for (int c = 0; c < possible_labels.size(); ++c) {
-      for (int j = 0; j < data[0].size()-1; ++j) {
+  for (unsigned int c = 0; c < possible_labels.size(); ++c) {
+      for (unsigned int j = 0; j < data[0].size()-1; ++j) {
            std_values[c][j] = sqrt(std_values[c][j]/(p_label[c]-1));
            //std::cout << " Standard deviation for class "<<c<< " , feature "<< j << " : " << std_values[c][j] << std::endl;
       }
@@ -119,9 +115,9 @@ string GNB::predict(const vector<double> &sample) {
    // Likelihood of the state sample to be part of a particular class
    double likelihood;
    
-   for (int c = 0; c < possible_labels.size(); ++c) {
+   for (unsigned int c = 0; c < possible_labels.size(); ++c) {
        likelihood = 1.0;
-       for (int i = 0; i < sample.size()-1; ++i) {
+       for (unsigned int i = 0; i < sample.size()-1; ++i) {
             // Product of all probabilities of independant state features i in the class c
             likelihood *= gaussian(std_values[c][i], mean_values[c][i], sample[i+1]);   
        }

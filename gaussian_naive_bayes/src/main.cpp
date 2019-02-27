@@ -1,5 +1,6 @@
 #include <fstream>
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <vector>
 #include "classifier.h"
@@ -15,10 +16,10 @@ vector<vector<double> > Load_State(string file_name);
 vector<string> Load_Label(string file_name);
 
 int main() {
-  vector< vector<double> > X_train = Load_State("data/train_states.txt");
-  vector< vector<double> > X_test  = Load_State("data/test_states.txt");
-  vector< string > Y_train = Load_Label("data/train_labels.txt");
-  vector< string > Y_test  = Load_Label("data/test_labels.txt");
+  vector< vector<double> > X_train = Load_State("../data/train_states.txt");
+  vector< vector<double> > X_test  = Load_State("../data/test_states.txt");
+  vector< string > Y_train = Load_Label("../data/train_labels.txt");
+  vector< string > Y_test  = Load_Label("../data/test_labels.txt");
     
   cout << "X_train number of elements " << X_train.size() << endl;
   cout << "X_train element size " << X_train[0].size() << endl;
@@ -33,7 +34,7 @@ int main() {
   cout << "Y_test number of elements " << Y_test.size() << endl;
   
   int score = 0;
-  for (int i = 0; i < X_test.size(); ++i) {
+  for (unsigned int i = 0; i < X_test.size(); ++i) {
     vector<double> coords = X_test[i];
     string predicted = gnb.predict(coords);
     if (predicted.compare(Y_test[i]) == 0) {
