@@ -18,3 +18,15 @@ Each coordinate contains 4 features:
 - d(d)/dt (Rate of change of ortogonal distance in time)
 
 The lane width is 4 meters (this might be helpful in engineering additional features in the algorithm).
+
+## Running the Code
+
+The main program can be built and ran by calling the following scripts from the project top directory:
+
+- ./build.sh
+- ./run.sh
+ 
+Any executables can be removed with the following script:
+
+ - ./clean.sh
+
