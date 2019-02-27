@@ -6,7 +6,7 @@ This folder contains the implementation of a Gaussian Naive Bayes classifier to 
 - keep lane (shown in black)
 - or change lanes right (shown in red)
 
-![Vehicle behaviors on a highway](images/naive_bayes.png)
+![Vehicle behaviors on a highway](images/naive-bayes.png)
 
 The main job here is to write a classifier that can predict which of these three maneuvers a vehicle is engaged in given a single coordinate (sampled from the trajectories shown below).
 

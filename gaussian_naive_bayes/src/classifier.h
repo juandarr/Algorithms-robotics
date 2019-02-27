@@ -1,5 +1,5 @@
-/* Classifier class
- * Description: This files creates the template for the classifier class
+/* Classifier class template
+ * Description: This file creates the template for the classifier class
  * Author: Juan David Rios
  * Date: February 26/2019
 */

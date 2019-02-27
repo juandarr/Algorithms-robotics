@@ -1,3 +1,9 @@
+/* Classifier class source code
+ * Description: This file implements the main function used in the Gaussian Naive Bayes classifier
+ * Author: Juan David Rios
+ * Date: February 26/2019
+*/
+
 #include "classifier.h"
 #include <math.h>
 #include <string>
