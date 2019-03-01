@@ -4,6 +4,8 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <iostream>
+#include <limits>
 #include "cost.h"
 
 using std::string;
@@ -44,35 +46,33 @@ vector<Vehicle> Vehicle::choose_next_state(map<int, vector<Vehicle>> &prediction
      */
     vector<string> possible_succesor_states = successor_states();
 
-    // Set of costs of different trajectories for a given state
-    vector<double> costs;
-    // Set of trajectories for the respective possible_succesor_state
-    vector<vector<Vehicle>> trajectories;
+    // Cost of different trajectories for a given state
+    double cost;
 
     vector<Vehicle> trajectory_for_state;
 
-    Vehicle v = Vehicle(this->lane, this->s, this->v, this->a, 
-                                        this->state);
-                                        
+    vector<Vehicle> best_trajectory;
+    int min_cost = std::numeric_limits<int>::max();
+
+    int c = 0;
     for (unsigned int i = 0; i < possible_succesor_states.size(); ++i) {
         
         trajectory_for_state = generate_trajectory(possible_succesor_states[i], predictions);
         
-        costs.push_back(calculate_cost(*this, predictions, trajectory_for_state ));
-        trajectories.push_back(trajectory_for_state);
-    }
-
-    int best_next_state_index = -1;
-    int min_cost = 999999;
-    for (unsigned int i = 0; i < possible_succesor_states.size(); ++i) {
-        string st = possible_succesor_states[i];
-        if (min_cost > costs[i]) {
-            min_cost = costs[i];
-            best_next_state_index = i;
+        if (trajectory_for_state.size() != 0) {
+        
+            cost = calculate_cost(*this, predictions, trajectory_for_state );
+            
+            if (min_cost > cost) {
+                min_cost = cost;
+                best_trajectory = trajectory_for_state;
+                ++c;
+            }
         }
     }
-    
-    return trajectories[best_next_state_index];
+ 
+
+    return best_trajectory;
 }
 
 vector<string> Vehicle::successor_states() {
