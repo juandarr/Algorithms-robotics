@@ -212,26 +212,26 @@ vector<Vehicle> Vehicle::prep_lane_change_trajectory(string state,
 
 vector<Vehicle> Vehicle::lane_change_trajectory(string state, 
                                                 map<int, vector<Vehicle>> &predictions) {
-  // Generate a lane change trajectory.
-  int new_lane = this->lane + lane_direction[state];
-  vector<Vehicle> trajectory;
-  Vehicle next_lane_vehicle;
-  // Check if a lane change is possible (check if another vehicle occupies 
-  //   that spot).
-  for (map<int, vector<Vehicle>>::iterator it = predictions.begin(); 
-       it != predictions.end(); ++it) {
+    // Generate a lane change trajectory.
+    int new_lane = this->lane + lane_direction[state];
+    vector<Vehicle> trajectory;
+    Vehicle next_lane_vehicle;
+    // Check if a lane change is possible (check if another vehicle occupies 
+    //   that spot).
+    for (map<int, vector<Vehicle>>::iterator it = predictions.begin(); 
+        it != predictions.end(); ++it) {
     next_lane_vehicle = it->second[0];
     if (next_lane_vehicle.s == this->s && next_lane_vehicle.lane == new_lane) {
-      // If lane change is not possible, return empty trajectory.
-      return trajectory;
+        // If lane change is not possible, return empty trajectory.
+        return trajectory;
     }
-  }
-  trajectory.push_back(Vehicle(this->lane, this->s, this->v, this->a, 
-                               this->state));
-  vector<float> kinematics = get_kinematics(predictions, new_lane);
-  trajectory.push_back(Vehicle(new_lane, kinematics[0], kinematics[1], 
-                               kinematics[2], state));
-  return trajectory;
+    }
+    trajectory.push_back(Vehicle(this->lane, this->s, this->v, this->a, 
+                                this->state));
+    vector<float> kinematics = get_kinematics(predictions, new_lane);
+    trajectory.push_back(Vehicle(new_lane, kinematics[0], kinematics[1], 
+                                kinematics[2], state));
+    return trajectory;
 }
 
 void Vehicle::increment(int dt = 1) {
