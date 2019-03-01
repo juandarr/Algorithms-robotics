@@ -1,5 +1,7 @@
 # Implementation of Gaussian Naive Bayes
 
+## Description 
+
 This folder contains the implementation of a Gaussian Naive Bayes classifier to predict the behavior of vehicles on a highway. The image below shows the vehicle behaviors on a 3 lane highway (with lanes of 4 meter width). The dots represent the d (y axis) and s (x axis) coordinates of vehicles as they either:
 
 - change lanes left (shown in blue)

@@ -144,7 +144,7 @@ void Road::display(int timestep) {
     oss << "+Meters ======================+ step: " << timestep << std::endl;
     int i = s_min;
 
-    for (int lj = 0; lj < road.size(); ++lj) {
+    for (unsigned int lj = 0; lj < road.size(); ++lj) {
     if (i%20 ==0) {
         std::stringstream buffer;
         std::stringstream dis;
@@ -159,7 +159,7 @@ void Road::display(int timestep) {
         oss << "      ";
     }          
     ++i;
-    for (int li = 0; li < road[0].size(); ++li) {
+    for (unsigned int li = 0; li < road[0].size(); ++li) {
         oss << "|" << road[lj][li];
     }
         oss << "|";

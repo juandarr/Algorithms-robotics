@@ -13,8 +13,8 @@ using std::vector;
 /**
  * Weights for cost functions.
  */
-const float REACH_GOAL = pow(10,6);
-const float EFFICIENCY = pow(10,5);
+const float REACH_GOAL = 10000.0;//pow(10,6);
+const float EFFICIENCY = 10.0;//pow(10,5);
 
 // Here we have provided two possible suggestions for cost functions, but feel 
 //   free to use your own! The weighted cost over all cost functions is computed
@@ -99,7 +99,7 @@ float calculate_cost(const Vehicle &vehicle,
     >> cf_list = {goal_distance_cost, inefficiency_cost};
     vector<float> weight_list = {REACH_GOAL, EFFICIENCY};
 
-    for (int i = 0; i < cf_list.size(); ++i) {
+    for (unsigned int i = 0; i < cf_list.size(); ++i) {
         float new_cost = weight_list[i]*cf_list[i](vehicle, trajectory, predictions, 
                                                     trajectory_data);
         cost += new_cost;

@@ -72,7 +72,7 @@ vector<Vehicle> Vehicle::choose_next_state(map<int, vector<Vehicle>> &prediction
         }
     }
     
-    return trajectories[i];
+    return trajectories[best_next_state_index];
 }
 
 vector<string> Vehicle::successor_states() {
