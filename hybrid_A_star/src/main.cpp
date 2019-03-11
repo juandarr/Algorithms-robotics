@@ -37,9 +37,9 @@ int main() {
   cout << "Finding path through grid:" << endl;
   
   // Creates an Empty Maze and for testing the number of expansions with it
-  for(int i = 0; i < GRID.size(); ++i) {
+  for(unsigned int i = 0; i < GRID.size(); ++i) {
     cout << GRID[i][0];
-    for(int j = 1; j < GRID[0].size(); ++j) {
+    for(unsigned int j = 1; j < GRID[0].size(); ++j) {
       cout << "," << GRID[i][j];
     }
     cout << endl;
@@ -54,7 +54,7 @@ int main() {
 
   cout << "show path from start to finish" << endl;
   for(int i = show_path.size()-1; i >= 0; --i) {
-      HBF::maze_s step = show_path[i];
+      HAS::maze_s step = show_path[i];
       cout << "##### step " << step.g << " #####" << endl;
       cout << "x " << step.x << endl;
       cout << "y " << step.y << endl;

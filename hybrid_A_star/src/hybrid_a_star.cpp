@@ -121,7 +121,7 @@ HAS::maze_path HAS::search(vector< vector<int> > &grid, vector<double> &start,
   came_from[stack][idx(state.x)][idx(state.y)] = state;
   int total_closed = 1;
   vector<maze_s> opened = {state};
-  bool finished = false;
+
   while(!opened.empty()) {
       
       
@@ -146,8 +146,8 @@ HAS::maze_path HAS::search(vector< vector<int> > &grid, vector<double> &start,
 
     vector<maze_s> next_state = expand(current, goal);
 
-    for(int i = 0; i < next_state.size(); ++i) {
-      int g2 = next_state[i].g;
+    for(unsigned int i = 0; i < next_state.size(); ++i) {
+    
       double x2 = next_state[i].x;
       double y2 = next_state[i].y;
       double theta2 = next_state[i].theta;

@@ -40,7 +40,7 @@ class HAS {
   vector<maze_s> expand(maze_s &state, vector<int> &goal);
 
   vector<maze_s> reconstruct_path(vector<vector<vector<maze_s>>> &came_from, 
-                                  vector<double> &start, HBF::maze_s &final);
+                                  vector<double> &start, HAS::maze_s &final);
 
   maze_path search(vector<vector<int>> &grid, vector<double> &start, 
                    vector<int> &goal);
