@@ -124,10 +124,12 @@ def run(robot, params, n=100, speed=1.0):
     int_cte = 0
     for i in range(2 * n):
         cte = robot.y
+
         diff_cte = cte - prev_cte
         int_cte += cte
         prev_cte = cte
         steer = -params[0] * cte - params[1] * diff_cte - params[2] * int_cte
+        
         robot.move(steer, speed)
         x_trajectory.append(robot.x)
         y_trajectory.append(robot.y)
@@ -142,7 +144,7 @@ def twiddle(tol=0.2):
     dp = [1, 1, 1]
     robot = make_robot()
     x_trajectory, y_trajectory, best_error = run(robot, p)
-    # TODO: twiddle loop here
+    # twiddle loop here
     while sum(dp) > tol:
         for i in range(len(p)):
             p[i] += dp[i]
